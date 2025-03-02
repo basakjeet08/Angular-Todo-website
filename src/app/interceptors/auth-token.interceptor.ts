@@ -18,6 +18,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const token = this.authService.getToken()?.token;
+    if (!token) return next.handle(request);
 
     // Adding the authorization header to the request
     const modifiedRequest = request.clone({
