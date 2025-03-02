@@ -1,1 +1,24 @@
-<p>details works!</p>
+<div id="grid-container">
+  <div class="card-container" *ngFor="let todo of todoList">
+    <!-- Description of the todo -->
+    <p [ngClass]="{ strike: todo.isCompleted }">
+      {{ todo.description }}
+    </p>
+
+    <!-- Button Container -->
+    <div class="row-container">
+      <!-- Button to edit the todo -->
+      <button (click)="onEditClick(todo.id)">Edit Todo</button>
+
+      <!-- Button to complete or incomplete the todo -->
+      <button class="secondary-btn" (click)="onStatusToggleClick(todo)">
+        Toggle
+      </button>
+
+      <!-- Button to delete the todo -->
+      <button class="destructive-btn" (click)="onDeleteClick(todo.id)">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

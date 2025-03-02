@@ -16,4 +16,22 @@ export class TodoService {
       description: description,
     });
   }
+
+  // This function fetches all the todo from the Backend Database
+  fetchTodos() {
+    return this.http.get<Todo[]>(`${this.url}/todos`);
+  }
+
+  // This function toggles the completion status of the todo
+  toggleTodoStatus(todo: Todo) {
+    return this.http.put<Todo[]>(`${this.url}/todos`, {
+      ...todo,
+      isCompleted: !todo.isCompleted,
+    });
+  }
+
+  // This function deletes the todo
+  deleteTodo(id: string) {
+    return this.http.delete<Todo[]>(`${this.url}/todos/${id}`);
+  }
 }
