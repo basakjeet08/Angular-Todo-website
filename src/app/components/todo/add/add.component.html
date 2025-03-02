@@ -1,1 +1,31 @@
-<p>add works!</p>
+<form
+  class="card-container p-40 g-24"
+  (ngSubmit)="onSubmitClick()"
+  #formContainer="ngForm"
+>
+  <!-- This is the input for the task -->
+  <div class="col-container">
+    <textarea
+      type="text"
+      name="description"
+      placeholder="Enter the Todo Task Details"
+      [(ngModel)]="taskInput.description"
+      required
+      #description="ngModel"
+    ></textarea>
+
+    <!-- Error Text if the description is not provided -->
+    <p class="error-text" *ngIf="!description.valid && description.touched">
+      Please Provide a Description
+    </p>
+  </div>
+
+  <!-- This button submits the form -->
+  <div class="row-container">
+    <!-- This is the Add / Edit Task Button -->
+    <button type="submit" [disabled]="!formContainer.valid">Add Task</button>
+
+    <!-- This is the cancel button -->
+    <button class="destructive-btn" type="button">Cancel</button>
+  </div>
+</form>

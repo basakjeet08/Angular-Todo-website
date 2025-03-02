@@ -1,0 +1,12 @@
+.p-40 {
+  padding: 40px;
+}
+
+.g-24 {
+  gap: 24px;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
