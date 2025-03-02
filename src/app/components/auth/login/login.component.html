@@ -59,5 +59,8 @@
         Go to Register Page
       </button>
     </div>
+
+    <!-- Error text from the api calls -->
+    <p class="error-text" *ngIf="errorMessage">{{ errorMessage }}</p>
   </form>
 </div>

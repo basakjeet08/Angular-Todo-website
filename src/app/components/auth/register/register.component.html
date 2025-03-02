@@ -119,5 +119,8 @@
         Go to Login Page
       </button>
     </div>
+
+    <!-- This is the error message from the api calls -->
+    <p class="error-text" *ngIf="errorMessage">{{ errorMessage }}</p>
   </form>
 </div>

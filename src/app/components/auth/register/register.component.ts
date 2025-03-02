@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class RegisterComponent {
     password: '',
     confirmPassword: '',
   };
+  errorMessage: string | null = null;
 
   // Injecting the auth service so that we can register this user
   constructor(private authService: AuthService, private router: Router) {}
@@ -32,8 +33,12 @@ export class RegisterComponent {
         this.userInput.password
       )
       .subscribe({
-        next: () => this.onGoToLoginClick(),
-        error: (error: Error) => alert(error.message),
+        next: () => {
+          alert('Registration Successful! Redirecting to the Login Page.....');
+          this.onGoToLoginClick();
+        },
+        error: () =>
+          (this.errorMessage = 'Registration Failed!! Try Again.....'),
       });
   }
 

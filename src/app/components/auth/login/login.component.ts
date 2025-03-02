@@ -13,6 +13,7 @@ export class LoginComponent {
     username: '',
     password: '',
   };
+  errorMessage: string | null = '';
 
   // Injecting the auth service to make api calls through service layer
   constructor(private authService: AuthService, private router: Router) {}
@@ -25,11 +26,11 @@ export class LoginComponent {
         next: (response) => {
           console.log(response);
 
-          // Sending the token data back to the service so that it can store it and navigating to the todo screen
-          this.authService.saveToken(response);
+          alert('Login Successfull!! Redirecting to the Todo Page......');
           this.router.navigate(['/']);
         },
-        error: (error: Error) => console.log(error),
+        error: () =>
+          (this.errorMessage = 'Login Failed!! Please Try again later .....'),
       });
   }
 
