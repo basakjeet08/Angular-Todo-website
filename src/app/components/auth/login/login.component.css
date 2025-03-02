@@ -1,0 +1,23 @@
+#outer-container {
+  height: 100%;
+
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.p-40 {
+  padding: 40px;
+}
+
+.g-24 {
+  gap: 24px;
+}
+
+.flex {
+  flex: 1;
+}
+
+button {
+  white-space: nowrap;
+}

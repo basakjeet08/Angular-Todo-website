@@ -1,1 +1,63 @@
-<p>login works!</p>
+<div id="outer-container">
+  <form
+    class="card-container p-40 g-24"
+    #formContainer="ngForm"
+    (ngSubmit)="onLoginClick()"
+  >
+    <!-- Title  -->
+    <h2>Login Form</h2>
+
+    <!-- Username Container -->
+    <div class="col-container">
+      <!-- Input for Username -->
+      <input
+        type="text"
+        name="username"
+        placeholder="Enter Username"
+        required
+        [(ngModel)]="userInput.username"
+        #username="ngModel"
+      />
+
+      <!-- Error text for username -->
+      <p class="error-text" *ngIf="!username.valid && username.touched">
+        Please enter the username.
+      </p>
+    </div>
+
+    <!-- Password Container -->
+    <div class="col-container">
+      <!-- Input for Password -->
+      <input
+        type="password"
+        name="password"
+        placeholder="Enter Password"
+        required
+        [(ngModel)]="userInput.password"
+        #password="ngModel"
+      />
+
+      <!-- Error Text for Password -->
+      <p class="error-text" *ngIf="!password.valid && password.touched">
+        Please Enter the password
+      </p>
+    </div>
+
+    <!-- Button Containers -->
+    <div class="row-container">
+      <!-- Register User Button -->
+      <button type="submit" class="flex" [disabled]="!formContainer.valid">
+        Register
+      </button>
+
+      <!-- Go to the Login Screen Button -->
+      <button
+        type="button"
+        class="flex secondary-btn"
+        (click)="onGoToRegisterClick()"
+      >
+        Go to Register Page
+      </button>
+    </div>
+  </form>
+</div>
