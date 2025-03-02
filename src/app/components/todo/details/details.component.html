@@ -7,7 +7,7 @@
 </div>
 
 <!-- No Data Found State -->
-<div class="card-container" *ngIf="todoList.length === 0">
+<div class="card-container" *ngIf="!isLoading && todoList.length === 0">
   <p class="error-text">No Data Found in the Database !!</p>
 </div>
 
