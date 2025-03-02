@@ -1,5 +1,9 @@
 <div id="outer-container">
+  <!-- This loading state is shown when the apis calls are happening -->
+  <app-loader *ngIf="isLoading" />
+
   <form
+    *ngIf="!isLoading"
     class="card-container p-40 g-24"
     #formContainer="ngForm"
     (ngSubmit)="onRegisterClick()"

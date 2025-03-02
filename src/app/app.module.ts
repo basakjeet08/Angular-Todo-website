@@ -11,6 +11,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AddComponent } from './components/todo/add/add.component';
 import { DetailsComponent } from './components/todo/details/details.component';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
     TodoComponent,
     AddComponent,
     DetailsComponent,
+    LoaderComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [

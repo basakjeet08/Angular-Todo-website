@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -16,13 +16,24 @@ export class RegisterComponent {
     password: '',
     confirmPassword: '',
   };
+
+  // This denotes the loading and error states
+  isLoading: boolean = false;
   errorMessage: string | null = null;
 
-  // Injecting the auth service so that we can register this user
-  constructor(private authService: AuthService, private router: Router) {}
+  // Injecting the auth service, router and the route
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   // This funciton is invoked when the user clicks the Register Button
   onRegisterClick() {
+    // Setting the loading state to true
+    this.isLoading = true;
+
+    // Computing the fullname together
     const name = this.userInput.firstname + ' ' + this.userInput.lastname;
 
     // Calling the auth service to post this user data and create an account for him
@@ -33,17 +44,22 @@ export class RegisterComponent {
         this.userInput.password
       )
       .subscribe({
+        // Handling when the api call is a success
         next: () => {
-          alert('Registration Successful! Redirecting to the Login Page.....');
+          this.isLoading = false;
           this.onGoToLoginClick();
         },
-        error: () =>
-          (this.errorMessage = 'Registration Failed!! Try Again.....'),
+
+        // Handling when the api call throws an error
+        error: (error: Error) => {
+          this.isLoading = false;
+          this.errorMessage = error.message;
+        },
       });
   }
 
   // This function is invoked when the user clicks the go to login button
   onGoToLoginClick() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['../login'], { relativeTo: this.route });
   }
 }
