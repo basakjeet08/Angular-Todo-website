@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -15,13 +17,28 @@ export class RegisterComponent {
     confirmPassword: '',
   };
 
+  // Injecting the auth service so that we can register this user
+  constructor(private authService: AuthService, private router: Router) {}
+
   // This funciton is invoked when the user clicks the Register Button
   onRegisterClick() {
-    alert(this.userInput);
+    const name = this.userInput.firstname + ' ' + this.userInput.lastname;
+
+    // Calling the auth service to post this user data and create an account for him
+    this.authService
+      .registerUser(
+        name.trim(),
+        this.userInput.username,
+        this.userInput.password
+      )
+      .subscribe({
+        next: () => this.onGoToLoginClick(),
+        error: (error: Error) => alert(error.message),
+      });
   }
 
   // This function is invoked when the user clicks the go to login button
   onGoToLoginClick() {
-    alert('Go to Login Clicked');
+    this.router.navigate(['/login']);
   }
 }
