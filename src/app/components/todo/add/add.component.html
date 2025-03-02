@@ -28,4 +28,7 @@
     <!-- This is the cancel button -->
     <button class="destructive-btn" type="button">Cancel</button>
   </div>
+
+  <!-- This is the error text for the api call errors -->
+  <p class="error-text" *ngIf="errorMessage">{{ errorMessage }}</p>
 </form>
