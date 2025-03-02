@@ -1,24 +1,43 @@
-<div id="grid-container">
-  <div class="card-container" *ngFor="let todo of todoList">
-    <!-- Description of the todo -->
-    <p [ngClass]="{ strike: todo.isCompleted }">
-      {{ todo.description }}
-    </p>
+<!-- Loading State for the components -->
+<app-loader *ngIf="isLoading" />
 
-    <!-- Button Container -->
-    <div class="row-container">
-      <!-- Button to edit the todo -->
-      <button (click)="onEditClick(todo.id)">Edit Todo</button>
+<!-- Error State for the components -->
+<div class="card-container" *ngIf="errorMessage">
+  <p class="error-text">{{ errorMessage }}</p>
+</div>
 
-      <!-- Button to complete or incomplete the todo -->
-      <button class="secondary-btn" (click)="onStatusToggleClick(todo)">
-        Toggle
-      </button>
+<!-- No Data Found State -->
+<div class="card-container" *ngIf="todoList.length === 0">
+  <p class="error-text">No Data Found in the Database !!</p>
+</div>
 
-      <!-- Button to delete the todo -->
-      <button class="destructive-btn" (click)="onDeleteClick(todo.id)">
-        Delete
-      </button>
+<!-- Success State Todo Grid Component -->
+<div
+  id="grid-wrapper"
+  *ngIf="!isLoading && !errorMessage && todoList.length !== 0"
+>
+  <div id="grid-container">
+    <div class="card-container" *ngFor="let todo of todoList">
+      <!-- Description of the todo -->
+      <p [ngClass]="{ strike: todo.isCompleted }">
+        {{ todo.description }}
+      </p>
+
+      <!-- Button Container -->
+      <div class="row-container">
+        <!-- Button to edit the todo -->
+        <button (click)="onEditClick(todo.id)">Edit Todo</button>
+
+        <!-- Button to complete or incomplete the todo -->
+        <button class="secondary-btn" (click)="onStatusToggleClick(todo)">
+          Toggle
+        </button>
+
+        <!-- Button to delete the todo -->
+        <button class="destructive-btn" (click)="onDeleteClick(todo.id)">
+          Delete
+        </button>
+      </div>
     </div>
   </div>
 </div>
