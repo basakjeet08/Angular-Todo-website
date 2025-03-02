@@ -34,7 +34,10 @@ export class AuthService {
         username: username,
         password: password,
       })
-      .pipe(tap((response) => this.saveToken(response)));
+      .pipe(
+        catchError(this.errorHandlerService.handleError),
+        tap((response) => this.saveToken(response))
+      );
   }
 
   // This function logs out the current user

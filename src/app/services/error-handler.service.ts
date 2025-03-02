@@ -13,7 +13,7 @@ export class ErrorHandlerService {
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Client Error: ${error.error.message}`;
     } else if (typeof error.error === 'string') {
-      errorMessage = `Server Error ${error.error}`;
+      errorMessage = `Server Error : ${error.error}`;
     } else if (typeof error.message === 'string') {
       errorMessage = error.message;
     }

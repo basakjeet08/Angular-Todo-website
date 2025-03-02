@@ -1,5 +1,10 @@
 <div id="outer-container">
+  <!-- Showing the loader component if the api calls are underway -->
+  <app-loader *ngIf="isLoading" />
+
+  <!-- This form is shown if the api call is not underway -->
   <form
+    *ngIf="!isLoading"
     class="card-container p-40 g-24"
     #formContainer="ngForm"
     (ngSubmit)="onLoginClick()"

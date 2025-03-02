@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,33 +9,44 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
   // This is the input from the user
-  userInput = {
-    username: '',
-    password: '',
-  };
+  userInput = { username: '', password: '' };
+
+  // This denotes the loading and error states
+  isLoading: boolean = false;
   errorMessage: string | null = '';
 
   // Injecting the auth service to make api calls through service layer
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   // This function is invoked when the user clicks on the login button
   onLoginClick() {
+    // Setting the loading state
+    this.isLoading = true;
+
+    // Making the api call
     this.authService
       .loginUser(this.userInput.username, this.userInput.password)
       .subscribe({
-        next: (response) => {
-          console.log(response);
-
-          alert('Login Successfull!! Redirecting to the Todo Page......');
-          this.router.navigate(['/todo']);
+        // Handling the success state
+        next: () => {
+          this.isLoading = false;
+          this.router.navigate(['../todo'], { relativeTo: this.route });
         },
-        error: () =>
-          (this.errorMessage = 'Login Failed!! Please Try again later .....'),
+
+        // Handling the error state
+        error: (error: Error) => {
+          this.isLoading = false;
+          this.errorMessage = error.message;
+        },
       });
   }
 
   // This function is invoked when the user clicks on the go to register page button
   onGoToRegisterClick() {
-    this.router.navigate(['/register']);
+    this.router.navigate(['../register'], { relativeTo: this.route });
   }
 }
