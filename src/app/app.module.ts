@@ -8,6 +8,8 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AddComponent } from './components/todo/add/add.component';
+import { DetailsComponent } from './components/todo/details/details.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     RegisterComponent,
     LoginComponent,
     TodoComponent,
+    AddComponent,
+    DetailsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

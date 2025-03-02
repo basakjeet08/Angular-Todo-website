@@ -21,3 +21,19 @@ header {
 
   background-color: var(--card--color);
 }
+
+main {
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+#center-container {
+  width: 50vw;
+
+  display: flex;
+  flex-direction: column;
+}

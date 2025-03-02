@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,7 +9,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class TodoComponent {
   // Injecting the auth service and router for the logout logic
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   // This function is invoked when the user clicks logout
   onLogoutClick() {
@@ -19,6 +23,6 @@ export class TodoComponent {
 
   // This function is executed when the user clicks on the add Todo Button
   onAddTodoClick() {
-    this.router.navigate(['add']);
+    this.router.navigate(['add'], { relativeTo: this.route });
   }
 }
