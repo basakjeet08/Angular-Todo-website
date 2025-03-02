@@ -15,7 +15,8 @@ export class AddComponent {
     isCompleted: false,
   };
 
-  // This is the variable for the api call errors
+  // This is the loading and error state
+  isLoading: boolean = false;
   errorMessage: string | null = null;
 
   // Injecting the Todo Service
@@ -27,13 +28,21 @@ export class AddComponent {
 
   // This function is invoked if the submit / edit button is clicked
   onSubmitClick() {
+    // Setting the current state to loading state
+    this.isLoading = true;
+
     this.todoService.addTodo(this.taskInput.description).subscribe({
+      // Success State
       next: () => {
-        // Routing back to the todo details page
-        alert('Todo Added Successfully');
+        this.isLoading = false;
         this.router.navigate(['../'], { relativeTo: this.route });
       },
-      error: (error) => console.log(error),
+
+      // Error State
+      error: (error: Error) => {
+        this.isLoading = false;
+        this.errorMessage = error.message;
+      },
     });
   }
 }
