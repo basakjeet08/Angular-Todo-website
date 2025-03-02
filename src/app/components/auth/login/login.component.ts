@@ -27,7 +27,7 @@ export class LoginComponent {
           console.log(response);
 
           alert('Login Successfull!! Redirecting to the Todo Page......');
-          this.router.navigate(['/']);
+          this.router.navigate(['/todo']);
         },
         error: () =>
           (this.errorMessage = 'Login Failed!! Please Try again later .....'),
