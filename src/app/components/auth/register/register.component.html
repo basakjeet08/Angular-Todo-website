@@ -1,1 +1,123 @@
-<p>register works!</p>
+<div id="outer-container">
+  <form
+    class="card-container p-40 g-24"
+    #formContainer="ngForm"
+    (ngSubmit)="onRegisterClick()"
+  >
+    <!-- Title  -->
+    <h2>Registration Form</h2>
+
+    <!-- Container for the Name Input -->
+    <div class="col-container">
+      <div class="row-container">
+        <!-- First Name input -->
+        <input
+          type="text"
+          name="firstname"
+          placeholder="Enter first name"
+          required
+          [(ngModel)]="userInput.firstname"
+          #firstname="ngModel"
+        />
+
+        <!-- Last Name Input -->
+        <input
+          type="text"
+          name="lastname"
+          placeholder="Enter last name"
+          [(ngModel)]="userInput.lastname"
+        />
+      </div>
+
+      <!-- Error text for name input -->
+      <p class="error-text" *ngIf="!firstname.valid && firstname.touched">
+        Please input the firstname field. That is required
+      </p>
+    </div>
+
+    <!-- Username Container -->
+    <div class="col-container">
+      <!-- Input for Username -->
+      <input
+        type="text"
+        name="username"
+        placeholder="Enter Username"
+        required
+        [(ngModel)]="userInput.username"
+        #username="ngModel"
+      />
+
+      <!-- Error text for username -->
+      <p class="error-text" *ngIf="!username.valid && username.touched">
+        Please input the username field. That is required
+      </p>
+    </div>
+
+    <!-- Password Container -->
+    <div class="col-container">
+      <!-- Input for Password -->
+      <input
+        type="password"
+        name="password"
+        placeholder="Enter Password"
+        required
+        minlength="6"
+        [(ngModel)]="userInput.password"
+        #password="ngModel"
+      />
+
+      <!-- Error Text for Password -->
+      <p class="error-text" *ngIf="!password.valid && password.touched">
+        Please Enter password of size > 6
+      </p>
+    </div>
+
+    <!-- Confirm Password Container -->
+    <div class="col-container">
+      <!-- Input for Confirm Password -->
+      <input
+        type="password"
+        name="confirmPassword"
+        placeholder="Re-Enter Passoword"
+        required
+        [(ngModel)]="userInput.confirmPassword"
+        #confirmPassword="ngModel"
+      />
+
+      <!-- Error Text for Confirm password text -->
+      <p
+        *ngIf="
+          password.touched &&
+          confirmPassword.touched &&
+          password.value !== confirmPassword.value
+        "
+        class="error-text"
+      >
+        Please check password equality.
+      </p>
+    </div>
+
+    <!-- Button Containers -->
+    <div class="row-container">
+      <!-- Register User Button -->
+      <button
+        type="submit"
+        class="flex"
+        [disabled]="
+          !formContainer.valid || password.value !== confirmPassword.value
+        "
+      >
+        Register
+      </button>
+
+      <!-- Go to the Login Screen Button -->
+      <button
+        type="button"
+        class="flex secondary-btn"
+        (click)="onGoToLoginClick()"
+      >
+        Go to Login Page
+      </button>
+    </div>
+  </form>
+</div>
