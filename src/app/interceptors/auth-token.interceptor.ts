@@ -17,6 +17,15 @@ export class AuthTokenInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    // Ignoring the tokens for the public routes
+    if (
+      request.url.includes('/verify') ||
+      request.url.includes('/login') ||
+      request.url.includes('/register')
+    ) {
+      return next.handle(request);
+    }
+
     const token = this.authService.getToken()?.token;
     if (!token) return next.handle(request);
 

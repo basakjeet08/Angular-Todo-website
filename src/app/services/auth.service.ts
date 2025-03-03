@@ -40,6 +40,16 @@ export class AuthService {
       );
   }
 
+  // This function refreshes the Access token
+  refreshToken() {
+    return this.http
+      .post<TokenData>(`${this.url}/verify`, this.getToken())
+      .pipe(
+        catchError(this.errorHandlerService.handleError),
+        tap((response) => this.saveToken(response))
+      );
+  }
+
   // This function logs out the current user
   logout(): void {
     localStorage.removeItem(this.localTokenKey);
